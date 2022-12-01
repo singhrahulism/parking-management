@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'  
-import MyComponent from '../components/CustomComponent'
 
 type Props = {}
 type State = {}
 
-class HomeScreen extends Component<Props, State> {
+class MyComponent extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
@@ -17,8 +16,7 @@ class HomeScreen extends Component<Props, State> {
 
     render() {
         return <View style={styles.container}>
-            <Text>This is HomeScreen</Text>
-            <MyComponent />
+            <Text>This is MyComponent</Text>
         </View>
     }
 }
@@ -29,4 +27,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomeScreen ;
+export default MyComponent ;
