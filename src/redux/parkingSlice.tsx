@@ -39,7 +39,7 @@ const parkingSlice = createSlice({
             console.log(action)
             state.parkingSpaces = action.payload
         },
-        generateParkingSpaces: (state, action) => {
+        generateParkingSpaces: (state) => {
             let space = []
             for(let i=0 ; i < state.parkingSpaces ; ++i)
             {
@@ -57,8 +57,6 @@ const parkingSlice = createSlice({
             state.parkedCars[randomSpace-1].isAlloted = true
             state.parkedCars[randomSpace-1].startTime = action.payload.startDate
             state.parkedCars[randomSpace-1].registrationNumber = action.payload.registrationNumber
-            // console.log(state.parked)
-            // console.log(action)
         },
         freeCarInParkingLot: (state, action) => {
             state.parked = state.parked.filter(space => space != action.payload._id)

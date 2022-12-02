@@ -2,16 +2,15 @@ import React from 'react'
 import { Text, View, StyleSheet, FlatList, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
 import SingleParkingSpace from './SingleParkingSpace'
+import { RootState } from '../../redux/store'
 
 const ParkingDrawSpace = () => {
 
-    const spaces = useSelector(state => state.parking.parkingSpaces)
-    const parkingData = useSelector(state => state.parking.parkedCars)
+    const parkingData = useSelector((state: RootState) => state.parking.parkedCars)
 
     console.log(parkingData)
 
     return <View style={styles.container}>
-        <Text>This is ParkingDrawSpace</Text>
         <FlatList
             data={parkingData}
             keyExtractor={parkedCar => parkedCar._id}
@@ -25,7 +24,7 @@ const ParkingDrawSpace = () => {
 
 const styles = StyleSheet.create({
     container: {
-    
+        marginBottom: 80
     }
 })
 

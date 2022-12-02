@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
-import {formatDistanceStrict} from 'date-fns';
 import { useDispatch } from 'react-redux'
 import { parkCarInParkingLot } from '../redux/parkingSlice';
 import PrimaryButton from '../components/Button/PrimaryButton';
@@ -13,10 +12,6 @@ const AllocateSpaceScreen = () => {
 
     const dispatch = useDispatch()
     const navigation = useNavigation()
-
-    // let date = new Date('Fri Dec 02 2022 11:20:52 GMT+0530 (IST)')
-    // console.log(formatDistanceStrict(new Date(), new Date(date)))
-
 
     const handlePress = () => {
         console.log('handlepressed')

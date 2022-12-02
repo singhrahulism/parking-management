@@ -8,7 +8,25 @@ import ParkingLotScreen from "./src/screens/ParkingLotScreen"
 import AllocateSpaceScreen from "./src/screens/AllocateSpaceScreen"
 import DeAllocateSpaceScreen from "./src/screens/DeAllocateSpaceScreen"
 
-const Stack = createNativeStackNavigator()
+export type Props = {
+  car: {
+    _id: number,
+    isAlloted?: Boolean,
+    registrationNumber: string,
+    startTime: string
+  }
+}
+
+type RootStackParamList = {
+  Home: undefined,
+  ParkingLot: undefined,
+  AllocateSpace: undefined,
+  DeAllocateSpace: {
+    car: Props
+  }
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const App = () => {
   return (

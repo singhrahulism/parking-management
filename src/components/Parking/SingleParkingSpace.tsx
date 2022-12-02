@@ -11,9 +11,13 @@ type Props = {
     }
 }
 
+type Navigation = {
+    navigate: Function
+}
+
 const SingleParkingSpace = ({car}: Props) => {
 
-    const navigation = useNavigation()
+    const navigation:Navigation = useNavigation()
 
     return <TouchableOpacity
                 activeOpacity={0.65}

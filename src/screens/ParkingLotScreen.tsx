@@ -4,12 +4,17 @@ import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 import PrimaryButton from '../components/Button/PrimaryButton'
 import ParkingDrawSpace from '../components/Parking/ParkingDrawSpace'
+import { RootState } from '../redux/store'
+
+type Navigation = {
+    navigate: Function
+}
 
 const ParkingLotScreen = () => {
 
-    const navigation = useNavigation()
-    const parkingSpaces = useSelector(state => state.parking.parkingSpaces)
-    const totalParkedCars = useSelector(state => state.parking.parked.length)
+    const navigation:Navigation = useNavigation()
+    const parkingSpaces = useSelector((state: RootState) => state.parking.parkingSpaces)
+    const totalParkedCars = useSelector((state: RootState) => state.parking.parked.length)
 
     console.log(typeof +parkingSpaces)
     console.log(typeof totalParkedCars)
@@ -27,7 +32,6 @@ const ParkingLotScreen = () => {
     }
 
     return <View style={styles.container}>
-        <Text>This is ParkingLotScreen</Text>
         <ScrollView>
             <ParkingDrawSpace />
         </ScrollView>
@@ -42,7 +46,8 @@ const ParkingLotScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        marginTop: 20
     }
 })
 

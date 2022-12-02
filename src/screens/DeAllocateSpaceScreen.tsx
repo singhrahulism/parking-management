@@ -4,28 +4,19 @@ import {formatDistanceStrict, setDefaultOptions} from 'date-fns';
 import PrimaryButton from '../components/Button/PrimaryButton';
 import { useDispatch } from 'react-redux'
 import { freeCarInParkingLot } from '../redux/parkingSlice'
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { Props } from '../../App';
 
-type Props = {
-    route: {
-        params: {
-            car: {
-                _id: number,
-                registrationNumber: string,
-                startTime: string
-            }
-        }
-    }
-}
-
-const DeAllocateSpaceScreen = ({route}: Props) => {
+const DeAllocateSpaceScreen = () => {
+    const route = useRoute<RouteProp<Props, 'DeAllocateSpace'>>()
+    const car = route.params.car
 
     const [isLoading, setIsLoading] = useState<Boolean>(false)
     const dispatch = useDispatch()
     const navigation = useNavigation()
 
     let currentTime = Date()
-    let totalTime = formatDistanceStrict(new Date(currentTime), new Date(route.params.car.startTime), { unit: 'minute' })
+    let totalTime = formatDistanceStrict(new Date(currentTime), new Date(car.startTime), { unit: 'minute' })
     let charges = 10
 
     const handlePress = async() => {
@@ -33,7 +24,7 @@ const DeAllocateSpaceScreen = ({route}: Props) => {
         let response = await fetch('https://httpstat.us/200', {
                 method: 'POST',
                 body: JSON.stringify({
-                    "car-registration": `${route.params.car.registrationNumber}`,
+                    "car-registration": `${car.registrationNumber}`,
                     "charge": `${charges}`
                 })
             })
@@ -41,7 +32,7 @@ const DeAllocateSpaceScreen = ({route}: Props) => {
         {
             console.log('success')
             dispatch(freeCarInParkingLot({
-                _id: route.params.car._id
+                _id: car._id
             }))
             ToastAndroid.show('Payment successful.', ToastAndroid.SHORT)
         }

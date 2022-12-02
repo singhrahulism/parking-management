@@ -1,6 +1,3 @@
-let parked = [2, 4, 5]
-console.log(parked)
+let reg = /^(0|[1-9][0-9]*)$/
 
-parked = parked.filter(item => item != 2)
-
-console.log(parked)
+console.log(reg.test('13425'))

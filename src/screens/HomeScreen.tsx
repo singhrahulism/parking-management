@@ -5,11 +5,15 @@ import { AntDesign } from '@expo/vector-icons';
 import { setParkingSpaces, generateParkingSpaces } from '../redux/parkingSlice';
 import { useNavigation } from '@react-navigation/native';
 
+type Navigation = {
+    navigate: Function
+}
+
 const HomeScreen: FC = () => {
 
-    const [spaces, setSpaces] = useState<number>(0)
+    const [spaces, setSpaces] = useState<string>('')
     const dispatch = useDispatch()
-    const navigation = useNavigation()
+    const navigation:Navigation = useNavigation()
 
     const handlePress = () => {
         dispatch(setParkingSpaces(spaces))
@@ -17,19 +21,28 @@ const HomeScreen: FC = () => {
         navigation.navigate('ParkingLot')
     }
 
+    const handleSpaces = (newSpaces: string) => {
+        let reg = /^(0|[1-9][0-9]*)$/
+        if(reg.test(newSpaces) || newSpaces == '')
+        {
+            setSpaces(newSpaces)
+        }
+    }
+
     return <View style={styles.container}>
         <View>
             <TextInput
                 style={styles.textInputContainer}
+                keyboardType={'numeric'}
                 placeholder='Enter number of parking spaces'
                 value={spaces}
-                onChangeText={newSpaces => setSpaces(newSpaces)}
+                onChangeText={newSpaces => handleSpaces(newSpaces)}
             />
         </View>
         <TouchableOpacity
             activeOpacity={spaces ? 0.65 : 1}
             style={[styles.continueContainer, { backgroundColor: spaces ? '#3898ef' : '#d6d6d6' }]}
-            onPress={spaces ? handlePress : null}
+            onPress={spaces ? () => handlePress() : () => {}}
         >
             <AntDesign name="arrowright" size={24} color={spaces ? 'white' : 'black'} />
         </TouchableOpacity>
@@ -41,8 +54,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'red',
-        borderWidth: 1
     },
     textInputContainer: {
         borderColor: 'grey',
