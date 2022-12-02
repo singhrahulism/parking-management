@@ -3,14 +3,17 @@ import { Text, View, StyleSheet, Dimensions, TouchableOpacity } from 'react-nati
 
 type Props = {
     title: string,
-    handlePress: Function
+    handlePress: Function,
+    isActive?: Boolean
 }
 
-const PrimaryButton = ({title, handlePress}:Props) => {
+const PrimaryButton = ({title, handlePress, isActive=true}:Props) => {
     return <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.container}
-                onPress={() => handlePress()}
+                activeOpacity={ isActive ? 0.7 : 1 }
+                style={[styles.container, {
+                    backgroundColor: isActive ? '#3898ef' : 'grey'
+                }]}
+                onPress={isActive ?  () => handlePress() : () => {}}
             >
         <Text style={{color: 'white', fontSize: 18}}>{title}</Text>
     </TouchableOpacity>

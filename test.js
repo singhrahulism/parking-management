@@ -1,5 +1,12 @@
-let obj = []
-let i = 1
-obj.push({a: i+1, b: 'b'})
-obj.push({c: 'c', d: 'd'})
-console.log(obj)
+let parked = [2, 4, 5]
+
+while(true)
+{
+    let num = (Math.floor(Math.random() * (15))+1)
+    if(!parked.includes(num))
+    {
+        console.log('does not include: ', num)
+        break
+    }
+    console.log('does include: ', num)
+}

@@ -2,18 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type ParkedCarType = {
     _id: string,
-    isAlloted: Boolean
+    isAlloted: Boolean,
+    startTime?: Date
 }
 
 type State = {
     parkingSpaces: number,
     parkedCars:ParkedCarType []
-
+    parked: number[]
 }
 
 const initialState:State = {
     parkingSpaces: 14,
-    parkedCars: []
+    parkedCars: [],
+    parked: []
+}
+
+const getRandomParkingSpaceAvailable = (target: any, limit: number) => {
+    while(true)
+    {
+        let num:number = (Math.floor(Math.random() * (limit))+1)
+        if(!target.includes(num))
+        {
+            return num
+        }
+    }
 }
 
 const parkingSlice = createSlice({
@@ -35,10 +48,19 @@ const parkingSlice = createSlice({
                 })
             }
             Object.assign(state.parkedCars, space)
+        },
+        parkCarInParkingLot: (state, action) => {
+            let randomSpace = getRandomParkingSpaceAvailable(state.parked, state.parkingSpaces)
+            console.log(randomSpace)
+            state.parked.push(randomSpace)
+            state.parkedCars[randomSpace-1].isAlloted = true
+            state.parkedCars[randomSpace-1].startTime = action.payload.startDate
+            // console.log(state.parked)
+            // console.log(action)
         }
     }
 })
 
-export const { setParkingSpaces, generateParkingSpaces } = parkingSlice.actions
+export const { setParkingSpaces, generateParkingSpaces, parkCarInParkingLot } = parkingSlice.actions
 
 export default parkingSlice.reducer
