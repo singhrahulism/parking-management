@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 type ParkedCarType = {
     _id: string,
     isAlloted: Boolean,
-    startTime?: Date
+    startTime?: Date,
+    registrationNumber?: string
 }
 
 type State = {
@@ -55,6 +56,7 @@ const parkingSlice = createSlice({
             state.parked.push(randomSpace)
             state.parkedCars[randomSpace-1].isAlloted = true
             state.parkedCars[randomSpace-1].startTime = action.payload.startDate
+            state.parkedCars[randomSpace-1].registrationNumber = action.payload.registrationNumber
             // console.log(state.parked)
             // console.log(action)
         }

@@ -25,8 +25,8 @@ const AllocateSpaceScreen = () => {
     }
 
     return <View style={styles.container}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 50}}>Add car to the Parking Lot</Text>
-        <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 20}}>Current Time: {Date().slice(16, 25)}</Text>
+        <Text style={styles.titleContainer}>Add car to the Parking Lot</Text>
+        <Text style={styles.currentTimeContainer}>Current Time: {Date().slice(16, 25)}</Text>
         <TextInput
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
@@ -42,6 +42,7 @@ const AllocateSpaceScreen = () => {
             title='Confirm'
             handlePress={handlePress}
             isActive={registrationNumber ? true : false}
+            message={'Please enter registration number'}
         />
     </View>
 }
@@ -58,6 +59,12 @@ const styles = StyleSheet.create({
         height: 50,
         paddingLeft: 10,
         borderRadius: 10
+    },
+    titleContainer: {
+        fontSize: 20, fontWeight: 'bold', marginBottom: 50
+    },
+    currentTimeContainer: {
+        fontSize: 18, fontWeight: 'bold', marginBottom: 20
     }
 })
 
