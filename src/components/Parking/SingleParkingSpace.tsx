@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 type Props = {
     car: {
@@ -11,12 +12,22 @@ type Props = {
 }
 
 const SingleParkingSpace = ({car}: Props) => {
+
+    const navigation = useNavigation()
+
     return <TouchableOpacity
                 activeOpacity={0.65}
                 style={[styles.container, {
                     backgroundColor: car.isAlloted ? '#cbf7d5' : '#e8aeae',
                     borderColor: car.isAlloted ? '#61d465' : '#d46161',
                 }]}
+                onPress={
+                    car.isAlloted
+                    ?
+                    () => navigation.navigate('DeAllocateSpace', {car: car})
+                    :
+                    () => ToastAndroid.show('No car present here', ToastAndroid.SHORT)
+                }
             >
         <Text>{car._id}</Text>
         {

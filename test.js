@@ -1,12 +1,6 @@
 let parked = [2, 4, 5]
+console.log(parked)
 
-while(true)
-{
-    let num = (Math.floor(Math.random() * (15))+1)
-    if(!parked.includes(num))
-    {
-        console.log('does not include: ', num)
-        break
-    }
-    console.log('does include: ', num)
-}
+parked = parked.filter(item => item != 2)
+
+console.log(parked)

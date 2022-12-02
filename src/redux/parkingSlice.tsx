@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 type ParkedCarType = {
     _id: string,
     isAlloted: Boolean,
-    startTime?: Date,
+    startTime?: Date | null,
     registrationNumber?: string
 }
 
@@ -59,10 +59,16 @@ const parkingSlice = createSlice({
             state.parkedCars[randomSpace-1].registrationNumber = action.payload.registrationNumber
             // console.log(state.parked)
             // console.log(action)
+        },
+        freeCarInParkingLot: (state, action) => {
+            state.parked = state.parked.filter(space => space != action.payload._id)
+            state.parkedCars[action.payload._id-1].isAlloted = false
+            state.parkedCars[action.payload._id-1].startTime = null
+            state.parkedCars[action.payload._id-1].registrationNumber = ''
         }
     }
 })
 
-export const { setParkingSpaces, generateParkingSpaces, parkCarInParkingLot } = parkingSlice.actions
+export const { setParkingSpaces, generateParkingSpaces, parkCarInParkingLot, freeCarInParkingLot } = parkingSlice.actions
 
 export default parkingSlice.reducer

@@ -1,14 +1,15 @@
 import React from 'react'
-import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ToastAndroid } from 'react-native'
+import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ToastAndroid, ActivityIndicator } from 'react-native'
 
 type Props = {
     title: string,
     handlePress: Function,
     isActive?: Boolean,
-    message: string
+    message: string,
+    useIndicator?: Boolean
 }
 
-const PrimaryButton = ({title, handlePress, isActive=true, message}:Props) => {
+const PrimaryButton = ({title, handlePress, isActive=true, message, useIndicator}:Props) => {
     return <TouchableOpacity
                 activeOpacity={ isActive ? 0.7 : 1 }
                 style={[styles.container, {
@@ -16,7 +17,13 @@ const PrimaryButton = ({title, handlePress, isActive=true, message}:Props) => {
                 }]}
                 onPress={isActive ?  () => handlePress() : () => ToastAndroid.show(message, ToastAndroid.SHORT)}
             >
-        <Text style={{color: 'white', fontSize: 18}}>{title}</Text>
+        {
+            useIndicator
+            ?
+            <ActivityIndicator size={30} color={'white'} />
+            :
+            <Text style={{color: 'white', fontSize: 18}}>{title}</Text>
+        }
     </TouchableOpacity>
 }
 
