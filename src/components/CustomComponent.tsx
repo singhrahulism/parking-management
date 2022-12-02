@@ -16,7 +16,7 @@ class MyComponent extends Component<Props, State> {
 
     render() {
         return <View style={styles.container}>
-            <Text>This is MyComponent</Text>
+            <Text>This is MyCompdonent</Text>
         </View>
     }
 }
