@@ -24,7 +24,7 @@ const ParkingDrawSpace = () => {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 80
+        paddingBottom: 80
     }
 })
 

@@ -14,7 +14,7 @@ type State = {
 }
 
 const initialState:State = {
-    parkingSpaces: 14,
+    parkingSpaces: 0,
     parkedCars: [],
     parked: []
 }

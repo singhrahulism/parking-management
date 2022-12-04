@@ -4,12 +4,12 @@ import {formatDistanceStrict, setDefaultOptions} from 'date-fns';
 import PrimaryButton from '../components/Button/PrimaryButton';
 import { useDispatch } from 'react-redux'
 import { freeCarInParkingLot } from '../redux/parkingSlice'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Props } from '../../App';
 
-const DeAllocateSpaceScreen = () => {
-    const route = useRoute<RouteProp<Props, 'DeAllocateSpace'>>()
-    const car = route.params.car
+const DeAllocateSpaceScreen = ({params}: {params:Props}) => {
+
+    const { car } = params
 
     const [isLoading, setIsLoading] = useState<Boolean>(false)
     const dispatch = useDispatch()
@@ -58,13 +58,13 @@ const DeAllocateSpaceScreen = () => {
         <Text style={styles.titleContainer}>Remove this parked car</Text>
         {/* {console.log(route)} */}
         <Text style={styles.carKeyContainer}>Parking location</Text>
-        <Text style={styles.carValueContainer}>At parking slot {route.params.car._id}</Text>
+        <Text style={styles.carValueContainer}>At parking slot {car._id}</Text>
 
         <Text style={styles.carKeyContainer}>Registration Number</Text>
-        <Text style={styles.carValueContainer}>{route.params.car.registrationNumber}</Text>
+        <Text style={styles.carValueContainer}>{car.registrationNumber}</Text>
 
         <Text style={styles.carKeyContainer}>Parked at</Text>
-        <Text style={styles.carValueContainer}>{route.params.car.startTime}</Text>
+        <Text style={styles.carValueContainer}>{car.startTime}</Text>
 
         <Text style={styles.carKeyContainer}>Current Time</Text>
         <Text style={styles.carValueContainer}>{currentTime}</Text>
