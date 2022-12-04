@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 type ParkedCarType = {
     _id: string,
     isAlloted: Boolean,
-    startTime?: Date | null,
-    registrationNumber?: string
+    startTime?: string | null,
+    registrationNumber?: string | null
 }
 
 type State = {

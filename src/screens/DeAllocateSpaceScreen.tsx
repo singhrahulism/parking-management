@@ -1,22 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import { Text, View, StyleSheet, ToastAndroid } from 'react-native'
 import {formatDistanceStrict, setDefaultOptions} from 'date-fns';
 import PrimaryButton from '../components/Button/PrimaryButton';
 import { useDispatch } from 'react-redux'
 import { freeCarInParkingLot } from '../redux/parkingSlice'
 import { useNavigation } from '@react-navigation/native';
-import { Props } from '../../App';
+import { RootStackParams } from '../../App';
+import { RouteProp } from '@react-navigation/native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const DeAllocateSpaceScreen = ({params}: {params:Props}) => {
+type Props = NativeStackScreenProps<RootStackParams, "DeAllocateSpace">
 
-    const { car } = params
+const DeAllocateSpaceScreen: FC<Props> = ({ route }) => {
+
+    const { car } = route.params
 
     const [isLoading, setIsLoading] = useState<Boolean>(false)
     const dispatch = useDispatch()
     const navigation = useNavigation()
 
+    let totalTime:string = '0'
     let currentTime = Date()
-    let totalTime = formatDistanceStrict(new Date(currentTime), new Date(car.startTime), { unit: 'minute' })
+    
+    if(car.startTime)
+    {
+        totalTime = formatDistanceStrict(new Date(currentTime), new Date(car.startTime), { unit: 'minute' })
+    }
     let charges = 10
 
     const handlePress = async() => {

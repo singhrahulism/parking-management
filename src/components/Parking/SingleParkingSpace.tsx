@@ -1,14 +1,10 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { CarProps } from '../../../App'
 
 type Props = {
-    car: {
-        _id: number,
-        isAlloted: Boolean,
-        registrationNumber: string,
-        startTime: string
-    }
+    car: CarProps
 }
 
 type Navigation = {
@@ -39,7 +35,7 @@ const SingleParkingSpace = ({car}: Props) => {
             ?
             <>
                 <Text style={{marginVertical: 4}}>Registration: {car.registrationNumber}</Text>
-                <Text>Time: {car.startTime.slice(16, 25)}</Text>
+                <Text>Time: {car?.startTime?.slice(16, 25)}</Text>
             </>
             :
             <Text>No car parked</Text>
