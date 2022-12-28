@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ToastAndroid, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ToastAndroid, ActivityIndicator, Platform } from 'react-native'
 
 type Props = {
     title: string,
@@ -19,7 +19,10 @@ const PrimaryButton = ({title, handlePress, isActive=true, message, useIndicator
     }
 
     const handlePressFallback = () => {
-        ToastAndroid.show(message, ToastAndroid.SHORT)
+        if(Platform.OS === 'android')
+        {
+            // ToastAndroid.show(message, ToastAndroid.SHORT)
+        }
     }
     
     return <TouchableOpacity

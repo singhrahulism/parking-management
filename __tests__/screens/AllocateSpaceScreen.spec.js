@@ -1,5 +1,6 @@
+import '@testing-library/jest-native/extend-expect'
 import React from "react";
-import { screen, render, fireEvent } from "@testing-library/react-native"; 
+import { screen, render, fireEvent, container } from "@testing-library/react-native"; 
 import AllocateSpaceScreen from "../../src/screens/AllocateSpaceScreen";
 import { renderWithRedux } from "../../helpers/testHelpers/renderWithRedux";
 import { NavigationContainer } from "@react-navigation/native";
@@ -55,5 +56,5 @@ describe('AllocateSpaceScreen', () => {
         })
         
     })
-    
+      
 })

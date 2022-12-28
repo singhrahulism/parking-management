@@ -8,13 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 const AllocateSpaceScreen = () => {
 
     const [registrationNumber, setRegistrationNumber] = useState<string>('')
-    const [focused, setFocused] = useState<Boolean>(false)
 
     const dispatch = useDispatch()
     const navigation = useNavigation()
 
     const handlePress = () => {
-        console.log('handlepressed')
         dispatch(parkCarInParkingLot({startDate: Date(), registrationNumber: registrationNumber}))
         navigation.goBack()
     }
@@ -23,12 +21,8 @@ const AllocateSpaceScreen = () => {
         <Text testID='ass-title' style={styles.titleContainer}>Add car to the Parking Lot</Text>
         <Text testID='ass-current-time' style={styles.currentTimeContainer}>Current Time: {Date().slice(16, 25)}</Text>
         <TextInput
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            style={[styles.textInputContainer, { 
-                borderColor: focused ? '#81db84' : 'grey',
-                borderWidth: focused ? 2 : 1
-             }]}
+            testID='ass-text-input'
+            style={styles.textInputContainer}
             placeholder={'Enter Registration Number'}
             value={registrationNumber}
             onChangeText={text => setRegistrationNumber(text)}
@@ -49,11 +43,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textInputContainer: {
-        borderColor: 'red',
-        borderWidth: 1,
         height: 50,
         paddingLeft: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        borderColor: 'grey'
     },
     titleContainer: {
         fontSize: 20, fontWeight: 'bold', marginBottom: 50

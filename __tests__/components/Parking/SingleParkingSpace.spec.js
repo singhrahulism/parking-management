@@ -1,8 +1,9 @@
+import '@testing-library/jest-native/extend-expect'
 import React from 'react'
-import { renderWithRedux } from '../../../helpers/testHelpers/renderWithRedux'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native'
+import { renderWithRedux, renderWithReduxCreate } from '../../../helpers/testHelpers/renderWithRedux'
+import { fireEvent, render, screen, renderHook } from '@testing-library/react-native'
 import SingleParkingSpace from '../../../src/components/Parking/SingleParkingSpace'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
 
 describe('SingleParkingSpace', () => {
 
@@ -21,12 +22,12 @@ describe('SingleParkingSpace', () => {
     }
 
     it('renders correctly', () => {
-        renderWithRedux(
+        let {container} = renderWithRedux(
             <NavigationContainer>
                 <SingleParkingSpace car={car1} />
             </NavigationContainer>
         )
-        expect(true).toEqual(true)
+        expect(container).toBeTruthy()
     })
     
     it('shows car id', () => {
@@ -38,33 +39,34 @@ describe('SingleParkingSpace', () => {
         expect(screen.getByText('1')).toBeVisible()
     })
     
-    // it('navigates to DeAllocateSpace Screen if pressed because car.isAlloted is true', () => {
+    it('is ok', () => {
+        let navigation = {
+            navigate: jest.fn()
+        }
+        jest.spyOn(navigation, 'navigate')
+
+        const tree = renderWithReduxCreate(
+            <NavigationContainer>
+                <SingleParkingSpace car={car1} />
+            </NavigationContainer>
+        )
         
-    //     const mockedNavigation = jest.fn();
+        const btn = tree.root.findByProps({testID: 'sps-button'}).props
+        btn.onPress()
 
-    //     jest.mock('@react-navigation/native', () => {
-    //     return {
-    //         useNavigation: () => ({
-    //             navigation: {
-    //                 navigate: mockedNavigation
-    //             }
-    //         }),
-    //     };
-    //     });
-
-    //     renderWithRedux(
-    //         <NavigationContainer>
-    //             <SingleParkingSpace car={car1} />
-    //         </NavigationContainer>
-    //     )
-    //     expect(screen.getByTestId('sps-button')).toBeVisible()
-    //     // jest.spyOn(Navigation, "useNavigation").mockReturnValue({navigate, mockedNavigation})
-    //     fireEvent.press(screen.getByTestId('sps-button'))
-    //     expect(mockedNavigation).toHaveBeenCalledWith('DeAllocateSpace')
-    //     // expect(mockedNavigation).toBeCalled()
-    //     // console.log(mockedNavigation.fn())
-    // })
-
+        expect(navigation.navigate).toHaveBeenCalled()
+    })
+        
+    it('shows toast message', () => {
+        renderWithRedux(
+            <NavigationContainer>
+                <SingleParkingSpace car={car2} />
+            </NavigationContainer>
+        )
+        fireEvent.press(screen.getByTestId('sps-button'))
+            
+    })
+    
     it('shows registration number and parking time if car.isAlloted is true', () => {
         renderWithRedux(
             <NavigationContainer>

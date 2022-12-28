@@ -1,3 +1,4 @@
+import '@testing-library/jest-native/extend-expect'
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import PrimaryButton from "../../../src/components/Button/PrimaryButton";
@@ -5,8 +6,8 @@ import PrimaryButton from "../../../src/components/Button/PrimaryButton";
 describe('PrimaryButton', () => {
 
     it('renders correctly', () => {
-        render(<PrimaryButton />)
-        expect(true).toEqual(true)
+        let {container} = render(<PrimaryButton />)
+        expect(container).toBeTruthy()
     })
 
     it('displays title', () => {

@@ -1,3 +1,4 @@
+import '@testing-library/jest-native/extend-expect'
 import React from "react";
 import { render, screen } from '@testing-library/react-native'
 import DeAllocateSpaceScreen from "../../src/screens/DeAllocateSpaceScreen";
@@ -43,7 +44,7 @@ describe('DeAllocateSpaceScreen', () => {
                 <DeAllocateSpaceScreen route={route}/>
             </NavigationContainer>
         )
-        console.log(typeof screen.getByTestId('dass-parking-location')._fiber.stateNode.props.children)
+        // console.log(typeof screen.getByTestId('dass-parking-location')._fiber.stateNode.props.children)
         expect(screen.getByTestId('dass-parking-location')).toBeVisible()
         expect(screen.getByText('Parking location')).toBeVisible()
     })

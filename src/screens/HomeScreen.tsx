@@ -18,7 +18,7 @@ const HomeScreen: FC = () => {
     const handlePress = () => {
         dispatch(setParkingSpaces(spaces))
         dispatch(generateParkingSpaces())
-        navigate('ParkingLot')
+        // navigate('ParkingLot')
     }
 
     const handleSpaces = (newSpaces: string) => {

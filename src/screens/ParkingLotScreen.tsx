@@ -17,7 +17,7 @@ const ParkingLotScreen = () => {
     const totalParkedCars = useSelector((state: RootState) => state.parking?.parked.length)
 
     const handlePress = () => {
-        navigation.navigate('AllocateSpace')
+        // navigation.navigate('AllocateSpace')
     }
 
     const canAllocate = ():Boolean => {

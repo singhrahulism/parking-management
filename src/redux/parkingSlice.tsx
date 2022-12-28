@@ -35,9 +35,11 @@ const parkingSlice = createSlice({
     initialState,
     reducers: {
         setParkingSpaces: (state, action) => {
-            console.log('here')
-            console.log(action)
+            // console.log('here')
+            // console.log(action)
             state.parkingSpaces = action.payload
+            state.parkedCars = []
+            state.parked = []
         },
         generateParkingSpaces: (state) => {
             let space = []
@@ -52,7 +54,7 @@ const parkingSlice = createSlice({
         },
         parkCarInParkingLot: (state, action) => {
             let randomSpace = getRandomParkingSpaceAvailable(state.parked, state.parkingSpaces)
-            console.log(randomSpace)
+            // console.log(randomSpace)
             state.parked.push(randomSpace)
             state.parkedCars[randomSpace-1].isAlloted = true
             state.parkedCars[randomSpace-1].startTime = action.payload.startDate

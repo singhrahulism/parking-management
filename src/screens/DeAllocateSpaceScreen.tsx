@@ -30,26 +30,26 @@ const DeAllocateSpaceScreen: FC<Props> = ({ route }) => {
 
     const handlePress = async() => {
         setIsLoading(true)
-        let response = await fetch('https://httpstat.us/200', {
-                method: 'POST',
-                body: JSON.stringify({
-                    "car-registration": `${car.registrationNumber}`,
-                    "charge": `${charges}`
-                })
-            })
-        if(response.ok)
-        {
-            console.log('success')
-            dispatch(freeCarInParkingLot({
-                _id: car._id
-            }))
-            ToastAndroid.show('Payment successful.', ToastAndroid.SHORT)
-        }
-        else
-        {
-            ToastAndroid.show('Payment unsuccessful.', ToastAndroid.SHORT)
-            console.log('error')
-        }
+        // let response = await fetch('https://httpstat.us/200', {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             "car-registration": `${car.registrationNumber}`,
+        //             "charge": `${charges}`
+        //         })
+        //     })
+        // if(response.ok)
+        // {
+        //     console.log('success')
+        //     dispatch(freeCarInParkingLot({
+        //         _id: car._id
+        //     }))
+        //     ToastAndroid.show('Payment successful.', ToastAndroid.SHORT)
+        // }
+        // else
+        // {
+        //     ToastAndroid.show('Payment unsuccessful.', ToastAndroid.SHORT)
+        //     console.log('error')
+        // }
         setIsLoading(false)
         navigation.goBack()
     }

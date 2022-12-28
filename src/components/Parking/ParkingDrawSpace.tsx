@@ -14,9 +14,7 @@ const ParkingDrawSpace = () => {
             data={parkingData}
             keyExtractor={parkedCar => parkedCar._id}
             numColumns={3}
-            renderItem={({item}) => {
-                return <SingleParkingSpace car={item} />
-            }}
+            renderItem={({item}) => { return <SingleParkingSpace car={item} /> }}
         />
     </View>
 }
